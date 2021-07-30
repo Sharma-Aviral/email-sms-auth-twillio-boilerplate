@@ -1,3 +1,7 @@
+
+//boiler plate for email / phone verification
+//pending api integration
+
 const express = require("express")
 const app = express()
 const port  = 3000
@@ -5,22 +9,18 @@ require('dotenv').config()
 const accountSid = process.env.twillio_account_sid;
 const authToken = process.env.twillio_auth_tokken;
 const client = require('twilio')(accountSid, authToken);
-const bodyParser = require('body-parser')
 
 
-app.use( bodyParser.json() );       // to support JSON-encoded bodies
-app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+
+app.use( express.json() );       // to support JSON-encoded bodies
+app.use(express.urlencoded({     // to support URL-encoded bodies
   extended: true
 })); 
 
 // use these variables to simulate fetched data from db 
 
-
 const phoneNumber  = "xxxxx"
-const emailId  = "xxxxx"
-
-
-
+const emailId  = "aviral.sharma.012@gmail.com"
 
 
 //sending otp....opens channel for verification sms otp
@@ -48,13 +48,6 @@ app.post("/verifyNumber" , (req,res)=>{
 })
 
 
-
-
-// good practice or not ??
-
-
-
-
 //sending otp....opens channel for verification for email
 app.get("/sendemail" , (req,res)=>{
    client.verify.services(process.env.twillio_verify_service_id)
@@ -78,10 +71,11 @@ client.verify.services(process.env.twillio_verify_service_id)
    if(verification_check.status === "approved"){res.send({emailVerified: true})}
    res.send({emailVerified: false})
 
-}); 
+});
+}) 
 
 
-
+// hosting app at 3000 
 app.listen(port , (err)=>{
    console.log("runnin")
 })
