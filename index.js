@@ -20,7 +20,7 @@ app.use(express.urlencoded({     // to support URL-encoded bodies
 // use these variables to simulate fetched data from db 
 
 const phoneNumber  = "xxxxx"
-const emailId  = "aviral.sharma.012@gmail.com"
+const emailId  = "xxxxxx"
 
 
 //sending otp....opens channel for verification sms otp
